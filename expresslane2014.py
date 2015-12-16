@@ -282,7 +282,7 @@ def weekly_traffic():
      return traffic_week
      
 def hourly_traffic():
-     traffic_hours = {"am5": 0, "am6": 0, "am7": 0, "am8": 0, "am9": 0, "pm3": 0, "pm4": 0, "pm5": 0, "pm6": 0, "pm7": 0}
+     traffic_hours = {"am5": 0, "am6": 0, "am7": 0, "am8": 0, "am9": 0, "pm3": 0, "pm4": 0, "pm5": 0, "pm6": 0}
      with open('ExpressLanesTrafficWithTolls-2014.csv', 'rb') as csvfile:
          trafficDataRaw = csv.reader(csvfile, delimiter=',', quotechar='|')
          trafficDataRaw.next()
@@ -310,6 +310,13 @@ def hourly_traffic():
                     traffic_hours['pm5'] +=row[3]
                elif hour == '18':
                     traffic_hours['pm6'] +=row[3]
+
+     with open('hour.csv', 'w') as csv_out:
+          fields = traffic_hours.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(traffic_hours)
+
      return traffic_hours
      
 def east_west():
@@ -317,12 +324,20 @@ def east_west():
      with open('ExpressLanesTrafficWithTolls-2014.csv', 'rb') as csvfile:
           trafficDataRaw = csv.reader(csvfile, delimiter=',', quotechar='|')
           trafficDataRaw.next()
+
           for row in trafficDataRaw:
                row[3] = int(row[3])
                if row[1][-1] == 'E':
                     direction["East"] += row[3]
                else:
                     direction["West"] += row[3]
+     
+     with open('direction.csv', 'w') as csv_out:
+          fields = direction.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(direction)
+
      return direction
 
 def main():
