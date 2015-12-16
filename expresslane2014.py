@@ -82,11 +82,11 @@ def date_to_week(dateTime):
 
 def time_to_hour(dateTime):
      # dateTime = row[0]
-     time = dateTime.split()[1] ### (splitting date and time. Showing time only, 05:00 format)
-     # dateTime = row[0]
-     # date = row[0].split(" ")
-     # date_str = date[0]
-     # time = date[1]
+     # time = dateTime.split()[1] ### (splitting date and time. Showing time only, 05:00 format)
+     #dateTime = row[0]
+     #date = row[0].split(" ")
+     #date_str = date[0]
+     time = dateTime[1]
      hour = time.split(':')[0]
      return hour
 
@@ -288,10 +288,10 @@ def hourly_traffic():
          trafficDataRaw.next()
          for row in trafficDataRaw:
                row[3] = int(row[3])
-               iDate = row[0].split(" ") ### splitting datetime into half
-               time = iDate[1] ### time
-               hour = time_to_hour(dateTime) 
-
+               dateTime = row[0].split(" ") ### splitting datetime into half
+               #time = iDate[1]
+               hour = time_to_hour(dateTime)
+                ### time
                if hour == '5':
                     traffic_hours['am5'] +=row[3]
                elif hour == '6':
@@ -313,23 +313,24 @@ def hourly_traffic():
      return traffic_hours
      
 def east_west():
+     direction = {"West":0, "East":0}
      with open('ExpressLanesTrafficWithTolls-2014.csv', 'rb') as csvfile:
           trafficDataRaw = csv.reader(csvfile, delimiter=',', quotechar='|')
           trafficDataRaw.next()
           for row in trafficDataRaw:
                row[3] = int(row[3])
                if row[1][-1] == 'E':
-                    East += row[3]
+                    direction["East"] += row[3]
                else:
-                    West += row[3]
-     return
+                    direction["West"] += row[3]
+     return direction
 
 def main():
      print total_2014()
      print month_traffic()
      print weekday_traffic()
      print weekly_traffic()
-     # print hourly_traffic()
+     print hourly_traffic()
      print east_west()
 
 main()
