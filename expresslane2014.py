@@ -136,6 +136,12 @@ def month_traffic():
                     traffic_month['nov'] +=row[3] 
                elif month == "12":
                     traffic_month['dec'] +=row[3] 
+
+     with open('month.csv', 'w') as csv_out:
+          fields = traffic_month.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(traffic_month)
      return traffic_month
      
 
@@ -160,6 +166,12 @@ def weekday_traffic():
                     traffic_by_days['Thursday'] += row[3]
                if weekday == "Friday":
                     traffic_by_days['Friday'] += row[3]
+
+    with open('days.csv', 'w') as csv_out:
+          fields = traffic_by_days.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(traffic_by_days)
     return traffic_by_days
 
 
@@ -279,6 +291,13 @@ def weekly_traffic():
                     traffic_week['week 51'] +=row[3]
                if week == '52':
                     traffic_week['week 52'] +=row[3]
+
+
+     with open('week.csv', 'w') as csv_out:
+          fields = traffic_week.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(traffic_week)
      return traffic_week
      
 def hourly_traffic():
