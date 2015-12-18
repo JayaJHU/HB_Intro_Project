@@ -371,7 +371,7 @@ def main():
      print weekly_traffic()
      print hourly_traffic()
      print east_west()
-     days_dataframes()
+    
 
 main()
      
