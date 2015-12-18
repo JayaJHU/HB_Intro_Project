@@ -3,6 +3,10 @@
 # Which day has the most number of cars?
 # Which hour has the most number of cars?
 # Which direction (237 Westbound or 237 Eastbound) has the most number of cars?
+"""
+parses main express lane traffic data into traffic totals by day, week, month &
+east/west directions
+"""
 
 
 import csv
@@ -359,6 +363,7 @@ def east_west():
 
      return direction
 
+
 def main():
      print total_2014()
      print month_traffic()
@@ -366,6 +371,7 @@ def main():
      print weekly_traffic()
      print hourly_traffic()
      print east_west()
+     days_dataframes()
 
 main()
      
