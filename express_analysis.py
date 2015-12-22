@@ -52,7 +52,12 @@ import pandas as pd
 hour_df = hour_df.transpose()
 print hour_df.describe()
 
-
+def hour_spd_df():
+     import pandas as pd
+     hour_spd = pd.read_csv('hour_avgspeed.csv')
+     print hour_spd
+     return hour_spd
+hour_spd = hour_spd_df()
 
 def direction_dataframes():
      import pandas as pd
