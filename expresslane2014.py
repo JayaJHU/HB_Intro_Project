@@ -106,7 +106,7 @@ def total_2014():
           
 
 def month_traffic():
-     traffic_month = {"jan": 0, "feb": 0, "mar": 0, "apr":0, "may":0, "june":0, "july":0, "aug":0, "sept":0, "oct":0, "nov": 0, "dec": 0}
+     traffic_month = {"01_jan":0, "02_feb": 0, "03_mar": 0, "04_apr":0, "05_may":0, "06_june":0, "07_july":0, "08_aug":0, "09_sept":0, "10_oct":0, "11_nov": 0, "12_dec": 0}
      with open('ExpressLanesTrafficWithTolls-2014.csv', 'rb') as csvfile:
           trafficDataRaw = csv.reader(csvfile, delimiter=',', quotechar='|')
           trafficDataRaw.next()
@@ -117,29 +117,29 @@ def month_traffic():
                month = date_str.split("/")[0]
                # Number of cars in a month
                if month == "1":
-                    traffic_month['jan'] +=row[3]         
+                    traffic_month['01_jan'] +=row[3]         
                elif month == "2":
-                    traffic_month['feb'] +=row[3] 
+                    traffic_month['02_feb'] +=row[3] 
                elif month == "3":
-                    traffic_month['mar'] +=row[3] 
+                    traffic_month['03_mar'] +=row[3] 
                elif month == "4":
-                    traffic_month['apr'] +=row[3] 
+                    traffic_month['04_apr'] +=row[3] 
                elif month == "5":
-                    traffic_month['may'] +=row[3] 
+                    traffic_month['05_may'] +=row[3] 
                elif month == "6":
-                    traffic_month['june'] +=row[3] 
+                    traffic_month['06_june'] +=row[3] 
                elif month == "7":
-                    traffic_month['july'] +=row[3] 
+                    traffic_month['07_july'] +=row[3] 
                elif month == "8":
-                    traffic_month['aug'] +=row[3] 
+                    traffic_month['08_aug'] +=row[3] 
                elif month == "9":
-                    traffic_month['sept'] +=row[3] 
+                    traffic_month['09_sept'] +=row[3] 
                elif month == "10":
-                    traffic_month['oct'] +=row[3] 
+                    traffic_month['10_oct'] +=row[3] 
                elif month == "11":
-                    traffic_month['nov'] +=row[3] 
+                    traffic_month['11_nov'] +=row[3] 
                elif month == "12":
-                    traffic_month['dec'] +=row[3] 
+                    traffic_month['12_dec'] +=row[3] 
 
      with open('month.csv', 'w') as csv_out:
           fields = traffic_month.keys()
