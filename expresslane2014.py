@@ -363,6 +363,60 @@ def east_west():
 
      return direction
 
+def hourly_traffic_spd():
+     """calculates average speed per hour and writes hour_avgspeed.csv"""
+     traffic_hours = hourly_traffic()
+    
+     traffic_hours_spd = {"am5":[0,0],"am6":[0,0],"am7":[0,0],"am8":[0,0],"am9":[0,0], "pm3":[0,0], "pm4": [0,0], "pm5":[0, 0], "pm6":[0,0]}
+     with open('ExpressLanesTrafficWithTolls-2014.csv', 'rb') as csvfile:
+         trafficDataRaw = csv.reader(csvfile, delimiter=',', quotechar='|')
+         trafficDataRaw.next()
+         for row in trafficDataRaw:
+               row[3] = int(row[3])
+               dateTime = row[0].split(" ") ### splitting datetime into half
+               #time = iDate[1]
+               hour = time_to_hour(dateTime)
+                ### time
+               if hour == '5':
+                    traffic_hours_spd['am5'][0] +=int(row[4])
+                    traffic_hours_spd['am5'][1] +=1
+               elif hour == '6':
+                    traffic_hours_spd['am6'][0] += int(row[4])
+                    traffic_hours_spd['am6'][1] +=1
+               elif hour == '7':
+                    traffic_hours_spd['am7'][0] +=int(row[4])
+                    traffic_hours_spd['am7'][1] +=1
+               elif hour == '8':
+                    traffic_hours_spd['am8'][0] +=int(row[4])
+                    traffic_hours_spd['am8'][1] +=1
+               elif hour == '9':
+                    traffic_hours_spd['am9'][0] +=int(row[4])
+                    traffic_hours_spd['am9'][1] +=1
+               elif hour == '15':
+                    traffic_hours_spd['pm3'][0] +=int(row[4])
+                    traffic_hours_spd['pm3'][1] +=1
+               elif hour == '16':
+                    traffic_hours_spd['pm4'][0] +=int(row[4])
+                    traffic_hours_spd['pm4'][1] +=1
+               elif hour == '17':
+                    traffic_hours_spd['pm5'][0] +=int(row[4])
+                    traffic_hours_spd['pm5'][1] +=1
+               elif hour == '18':
+                    traffic_hours_spd['pm6'][0] +=int(row[4])
+                    traffic_hours_spd['pm6'][1] +=1
+     
+     hrs_spd = {}
+     for hour, value in traffic_hours_spd.items():
+          hrs_spd[hour] = (value[0]/value[1])
+     
+     with open('hour_avgspeed.csv', 'w') as csv_out:
+          fields = hrs_spd.keys()
+          writer = csv.DictWriter(csv_out, fieldnames=fields)
+          writer.writeheader()
+          writer.writerow(hrs_spd)
+
+     return hrs_spd
+
 
 def main():
      print total_2014()
@@ -370,6 +424,7 @@ def main():
      print weekday_traffic()
      print weekly_traffic()
      print hourly_traffic()
+     print hourly_traffic_spd()
      print east_west()
     
 
